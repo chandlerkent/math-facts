@@ -20,7 +20,6 @@ export default Ember.Controller.extend({
     clickColumn(column) {
       let chart = this.get('chart');
 
-      let rows = chart.length;
       let active;
       for (let i = 0; i < chart.length; i++) {
         let cell = chart[i][column];
