@@ -1,0 +1,32 @@
+<div class="summary">
+  {{#link-to 'index' classNames='no-print'}}&larr; Start a New Test{{/link-to}}
+
+  <div class="content">
+    <div class="centered">
+      <h1>{{results.name}}</h1>
+      <h5>{{moment-format results.takenAt 'MM/DD/YYYY'}}</h5>
+    </div>
+  </div>
+  <table class="summary">
+    <tr class="column-header">
+      <td class="empty" {{action 'toggleAll'}}></td>
+      {{#each chart.[0] as |column colIndex|}}
+        <td class="clickable" {{action 'clickColumn' colIndex}}>{{colIndex}}</td>
+      {{/each}}
+    </tr>
+    {{#each chart as |row rowIndex|}}
+      <tr>
+        <td class="row-header clickable" {{action 'clickRow' rowIndex}}>{{rowIndex}}</td>
+        {{#each row as |data colIndex|}}
+          <td class="{{unless data.hasAnswer 'clickable'}} {{if data.isCorrect (unless data.isOverTime 'correct')}} {{if data.isWrongOrOverTime 'wrong'}} {{if data.isOverridden 'override'}}" {{action 'clickCell' rowIndex colIndex}}>
+            {{data.prompt}} {{if data.isWrong '='}} {{if data.isWrong data.response}}
+            {{#if data.isOverTime}}
+              <br>
+              <span class="think-time">(think time)</span>
+            {{/if}}
+          </td>
+        {{/each}}
+      </tr>
+    {{/each}}
+  </table>
+</div>

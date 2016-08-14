@@ -1,0 +1,139 @@
+@import 'theme';
+
+body {
+  font-size: large;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.clickable, [data-ember-action] {
+  cursor: pointer;
+}
+
+.content {
+  max-width: 792px;
+  margin: 0 auto;
+}
+
+.centered {
+  text-align: center;
+}
+
+div.summary {
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+  }
+}
+
+table.summary {
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+
+  tr.column-header {
+    td {
+      height: 25px;
+      font-weight: bold;
+    }
+  }
+
+  th, td {
+    border: 1px solid black;
+  }
+
+  td {
+    width: 100px;
+    height: 45px;
+    text-align: center;
+
+    @column-header-width: 30px;
+
+    &.correct {
+      background-color: green;
+    }
+
+    &.wrong {
+      background-color: lightgray;
+    }
+
+    &.override, &.clickable.override:hover {
+      background-color: rgb(144, 238, 144);
+    }
+
+    &.clickable:hover {
+      background-color: rgba(144, 238, 144, 0.25);
+    }
+
+    &.empty {
+      border: none;
+      width: @column-header-width;
+    }
+
+    &.row-header {
+      font-weight: bold;
+      width: @column-header-width;
+    }
+
+    .think-time {
+      font-style: italic;
+      font-size: 12px;
+    }
+  }
+}
+
+.mf-progress {
+  width: 100%;
+  height: 5px;
+
+  span {
+    display: block;
+    height: 100%;
+    background-color: @primary-color;
+    // width: 25%; // Set by component
+  }
+}
+
+.mf-question {
+  margin: 0 auto;
+  width: 50%;
+  text-align: center;
+
+  & div {
+    margin: 20px 0;
+  }
+
+  & div:first-child {
+    margin-top: 0;
+  }
+
+  & div:last-child {
+    margin-bottom: 0;
+  }
+
+  .question {
+    font-size: 48px;
+
+    input {
+      text-align: center;
+    }
+  }
+}
+
+.mf-colorize-interval {
+  &.warn {
+    color: orange;
+  }
+
+  &.error {
+    color: red;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none;
+  }
+
+  *:hover {
+    background-color: transparent !important;
+  }
+}

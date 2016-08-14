@@ -1,0 +1,29 @@
+{{#mf-timer startTime=startTime as |interval isPlaying playPause|}}
+  <div class="timer">
+    {{#mf-colorize-interval interval=(millisecondsToSeconds interval)}}
+      {{millisecondsToSeconds interval}}
+    {{/mf-colorize-interval}}
+  </div>
+
+  <div class="question">
+    {{{prompt}}} = {{mf-number-input value=value enter=(action 'submitResponse' interval)}}
+    <button {{action 'submitResponse' interval}}>&check;</button>
+  </div>
+
+  <div class="buttons">
+    <button {{action endInterview}}>Stop</button>
+    {{#if isPlaying}}
+      <button {{action playPause}}>Pause</button>
+    {{else}}
+      <button {{action playPause}}>Play</button>
+    {{/if}}
+
+    <button {{action 'submitResponse' interval}}>
+      {{#if question.isLastQuestion}}
+        End Interview
+      {{else}}
+        Next Question &rarr;
+      {{/if}}
+    </button>
+  </div>
+{{/mf-timer}}
