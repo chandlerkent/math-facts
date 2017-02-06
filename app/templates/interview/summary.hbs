@@ -18,11 +18,13 @@
       <tr>
         <td class="row-header clickable" {{action 'clickRow' rowIndex}}>{{rowIndex}}</td>
         {{#each row as |data colIndex|}}
-          <td class="{{unless data.hasAnswer 'clickable'}} {{if data.isCorrect (unless data.isOverTime 'correct')}} {{if data.isWrongOrOverTime 'wrong'}} {{if data.isOverridden 'override'}}" {{action 'clickCell' rowIndex colIndex}}>
-            {{data.prompt}} {{if data.isWrong '='}} {{if data.isWrong data.response}}
-            {{#if data.isOverTime}}
-              <br>
-              <span class="think-time">(think time)</span>
+          <td class="{{if data.isInteractive 'clickable'}} {{if data.isCorrect (unless data.isOverTime 'correct')}} {{if data.isWrongOrOverTime 'wrong'}} {{if data.isOverridden 'override'}}" onclick={{if data.isInteractive (action 'clickCell' rowIndex colIndex)}}>
+            {{#if data.shouldShow}}
+              {{data.prompt}} {{if data.isWrong '='}} {{if data.isWrong data.response}}
+              {{#if data.isOverTime}}
+                <br>
+                <span class="think-time">(think time)</span>
+              {{/if}}
             {{/if}}
           </td>
         {{/each}}

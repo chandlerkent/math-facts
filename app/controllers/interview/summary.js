@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
 
       let cell = chart[row][column];
 
-      if (cell.get('hasAnswer')) {
+      if (!cell.get('isInteractive')) {
         return;
       }
 
@@ -23,7 +23,7 @@ export default Ember.Controller.extend({
       let active;
       for (let i = 0; i < chart.length; i++) {
         let cell = chart[i][column];
-        if (cell.get('hasAnswer')) {
+        if (!cell.get('isInteractive')) {
           continue;
         }
 
@@ -42,7 +42,7 @@ export default Ember.Controller.extend({
       let active;
       for (let i = 0; i < columns; i++) {
         let cell = chart[row][i];
-        if (cell.get('hasAnswer')) {
+        if (!cell.get('isInteractive')) {
           continue;
         }
 
@@ -62,7 +62,7 @@ export default Ember.Controller.extend({
       for (let row = 0; row < rows; row++) {
         for (let column = 0; column < chart[row].length; column++) {
           let cell = chart[row][column];
-          if (cell.get('hasAnswer')) {
+          if (!cell.get('isInteractive')) {
             continue;
           }
 

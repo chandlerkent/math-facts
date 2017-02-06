@@ -1,5 +1,15 @@
 import Ember from 'ember';
 
+let Cell = Ember.Object.extend({
+  prompt: '',
+  hasAnswer: false,
+  shouldShow: false,
+
+  isInteractive: Ember.computed('hasAnswer', 'shouldShow', function () {
+    return this.get('shouldShow') && !this.get('hasAnswer');
+  })
+});
+
 export default Ember.Service.extend({
   createChartForInterviewAndResults(interview, results) {
     let operation = interview.get('operator');
@@ -11,6 +21,7 @@ export default Ember.Service.extend({
     for (let rhs = rhsRange[0]; rhs <= rhsRange[1]; rhs++) {
       let row = [];
       for (let lhs = lhsRange[0]; lhs <= lhsRange[1]; lhs++) {
+        let shouldShow = this.shouldShow(interview, operation, lhs, rhs);
         let prompt = this.createPromptForOperation(operation, lhs, rhs).join(' ');
         let printablePrompt = prompt;
         if (operation === '/') {
@@ -20,7 +31,7 @@ export default Ember.Service.extend({
         }
         let questionIndex = this.indexOfQuestionByPrompt(interview, prompt);
         if (questionIndex < 0) {
-          row.push(Ember.Object.create({ prompt: printablePrompt, hasAnswer: false }));
+          row.push(Cell.create({ prompt: printablePrompt, shouldShow }));
           continue;
         }
 
@@ -30,14 +41,15 @@ export default Ember.Service.extend({
         let isOverTime = answer ? answer.get('isOverTime') : false;
         let response = answer && answer.get('answer');
 
-        row.push(Ember.Object.create({
+        row.push(Cell.create({
           hasAnswer: !!response,
           prompt: printablePrompt,
           isCorrect,
           isWrong,
           isOverTime,
           isWrongOrOverTime: isWrong || isOverTime,
-          response
+          response,
+          shouldShow
         }));
       }
       chart.push(row);
@@ -84,5 +96,20 @@ export default Ember.Service.extend({
     }
 
     return -1;
+  },
+
+  shouldShow(interview, operation, lhs, rhs) {
+    // Only have a custom chart for addition-c
+    if (interview.get('id') !== 'addition-c') { return true; }
+
+    // Always show if one of the numbers is 10, but not both
+    if (((rhs === 10) || (lhs === 10)) && (lhs !== rhs)) {
+      return true;
+    }
+
+    // Otherwise, only show if the sum of the numbers is less than 11
+    return ((lhs + rhs) < 11);
   }
 });
+
+
