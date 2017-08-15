@@ -20,6 +20,10 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+      MAX_TIME_PER_QUESTION: {
+        DEFAULT: 4000,
+        EXTENDED: 6000
+      }
     }
   };
 

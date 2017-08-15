@@ -1,6 +1,6 @@
 {{#mf-timer startTime=startTime as |interval isPlaying playPause|}}
   <div class="timer">
-    {{#mf-colorize-interval interval=(milliseconds-to-seconds interval)}}
+    {{#mf-colorize-interval interval=interval maxTimeInMilliseconds=timeAllowedInMS}}
       {{milliseconds-to-seconds interval}}
     {{/mf-colorize-interval}}
   </div>

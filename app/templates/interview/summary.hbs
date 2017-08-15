@@ -23,7 +23,7 @@
               {{data.prompt}} {{if data.isWrong '='}} {{if data.isWrong data.response}}
               {{#if data.isOverTime}}
                 <br>
-                <span class="think-time">(think time)</span>
+                <span class="think-time">(think time{{#if results.isExtendedTime}}*{{/if}})</span>
               {{/if}}
             {{/if}}
           </td>
@@ -31,4 +31,9 @@
       </tr>
     {{/each}}
   </table>
+  {{#if results.isExtendedTime}}
+    <div class="centered">
+      <i>* Extended Time</i>
+    </div>
+  {{/if}}
 </div>

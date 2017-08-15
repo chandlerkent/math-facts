@@ -1,6 +1,7 @@
 import Ember from 'ember';
+import ENV from 'math-facts/config/environment';
 
-const MAX_TIME_ALLOWED = 3000;
+const MAX_TIME_PER_QUESTION = ENV.APP.MAX_TIME_PER_QUESTION;
 
 export default Ember.Controller.extend({
   queryParams: ['question'],
@@ -87,7 +88,9 @@ export default Ember.Controller.extend({
   },
 
   isTooLong(time) {
-    return time > MAX_TIME_ALLOWED;
+    let maxTimeAllowed = this.get('results.maxTimePerQuestionInMS');
+
+    return time > maxTimeAllowed;
   },
 
   actions: {

@@ -4,6 +4,7 @@ export default Ember.Component.extend({
   tagName: 'div',
   classNames: ['mf-question'],
   question: null,
+  timeAllowedInMS: null,
   value: null,
   endInterview: null,
   startTime: null,
@@ -22,6 +23,7 @@ export default Ember.Component.extend({
   },
 
   submitResponse(interval) {
+    console.log(this.get('timeAllowedInMS'));
     this.get('onSubmitResponse')(Ember.Object.create({
       value: this.get('value'),
       time: interval
