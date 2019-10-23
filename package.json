@@ -12,7 +12,9 @@
   "scripts": {
     "build": "ember build --environment production",
     "start": "ember server",
-    "test": "ember test"
+    "test": "ember test",
+    "deploy-test": "npm run build && netlify deploy --site 7d08dd0c-c320-4556-8724-12c97138dbea",
+    "deploy": "npm run build && netlify deploy --site 7d08dd0c-c320-4556-8724-12c97138dbea --prod"
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
@@ -38,11 +40,11 @@
     "ember-load-initializers": "^0.6.0",
     "ember-localstorage-adapter": "1.0.0",
     "ember-moment": "7.3.0",
-    "ember-netlify": "0.0.1",
     "ember-resolver": "^2.0.3",
     "ember-source": "^2.11.0",
     "ember-welcome-page": "^2.0.2",
-    "loader.js": "^4.0.10"
+    "loader.js": "^4.0.10",
+    "netlify-cli": "^2.19.2"
   },
   "engines": {
     "node": ">= 0.12.0"
