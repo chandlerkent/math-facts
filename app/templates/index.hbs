@@ -3,15 +3,23 @@
     <h1>Select an Operation to Begin</h1>
 
     <div class="buttons">
-      <LinkTo @route="interview" @model="addition" @tagName="button" @title="Addition">Addition</LinkTo>
-      <LinkTo @route="interview" @model="subtraction" @tagName="button" @title="Subtraction">Subtraction</LinkTo>
-      <LinkTo @route="interview" @model="multiplication" @tagName="button" @title="Multiplication">Multiplication</LinkTo>
-      <LinkTo @route="interview" @model="division" @tagName="button" @title="Division">Division</LinkTo>
+      <div>
+        <LinkTo @route="interview" @model="addition" title="Addition">Addition</LinkTo>
+      </div>
+      <div>
+        <LinkTo @route="interview" @model="subtraction" title="Subtraction">Subtraction</LinkTo>
+      </div>
+      <div>
+        <LinkTo @route="interview" @model="multiplication" title="Multiplication">Multiplication</LinkTo>
+      </div>
+      <div>
+        <LinkTo @route="interview" @model="division" title="Division">Division</LinkTo>
+      </div>
     </div>
 
     <h3>K-1</h3>
     <div class="buttons">
-      <LinkTo @route="interview" @model="addition-c" @tagName="button" @title="Addition">Addition</LinkTo>
+      <LinkTo @route="interview" @model="addition-c" title="Addition">Addition</LinkTo>
     </div>
   </div>
 </div>

@@ -1,20 +1,23 @@
 import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
 
-export default Route.extend({
-  queryParams: {
+export default class InProcessInterviewRoute extends Route {
+  @service store;
+
+  queryParams = {
     question: {
       replace: true
     }
-  },
+  }
 
   model(params) {
     return this.store.find('interview-result', params.result_id);
-  },
+  }
 
   setupController(controller, model) {
-    this._super(controller, model);
+    super.setupController(controller, model);
 
     controller.set('interview', this.modelFor('interview'));
     controller.set('results', model);
   }
-});
+};

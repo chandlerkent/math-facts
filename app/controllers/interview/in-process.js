@@ -3,9 +3,6 @@ import { capitalize } from '@ember/string';
 import { on } from '@ember/object/evented';
 import EmberObject, { computed, observer } from '@ember/object';
 import Controller from '@ember/controller';
-import ENV from 'math-facts/config/environment';
-
-const MAX_TIME_PER_QUESTION = ENV.APP.MAX_TIME_PER_QUESTION;
 
 export default Controller.extend({
   queryParams: ['question'],
@@ -104,7 +101,7 @@ export default Controller.extend({
       this.get('results.answers').replace(
         this.indexOfCurrentQuestion,
         1,
-        result);
+        [result]);
 
       this.results.save().then(() => this.goToNextQuestion());
     },

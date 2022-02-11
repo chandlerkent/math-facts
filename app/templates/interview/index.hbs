@@ -4,11 +4,11 @@
   <div class="form">
     <p>
       <label>Student's Name:</label>
-      <Input @type="text" @autofocus={{true}} @value={{studentName}} @enter="startInterview" />
+      <Input @type="text" autofocus @value={{this.studentName}} @enter={{action "startInterview"}} />
     </p>
     <p>
       <label for="isExtendedTime" title="Default time is 4 seconds. Extended time is 6 seconds.">Extended Time?</label>
-      <Input @id="isExtendedTime" @type="checkbox" @checked={{isExtendedTime}} />
+      <Input id="isExtendedTime" @type="checkbox" @checked={{this.isExtendedTime}} />
     </p>
   </div>
   <div class="centered">

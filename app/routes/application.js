@@ -2,8 +2,11 @@ import { all } from 'rsvp';
 import EmberObject from '@ember/object';
 import Route from '@ember/routing/route';
 import { INTERVIEWS } from '../models/interview';
+import { inject as service } from '@ember/service';
 
-export default Route.extend({
+export default class ApplicationRoute extends Route {
+  @service store;
+
   beforeModel() {
     let data = INTERVIEWS.map(interview => {
       interview.attributes.questions = interview.attributes.questions
@@ -22,8 +25,8 @@ export default Route.extend({
     this.cleanUpOldRecords(10);
 
     this.store.push({ data });
-  },
-  
+  }
+
   cleanUpOldRecords(keepNumberOfRecords) {
     return this.store.findAll('interview-result')
       .then(results => results.sortBy('takenAt').reverse())
@@ -35,4 +38,4 @@ export default Route.extend({
       })
       .then(promises => all(promises));
   }
-});
+};
