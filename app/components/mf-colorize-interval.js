@@ -9,8 +9,8 @@ export default Component.extend({
   interval: null,
 
   color: computed('interval', function () {
-    let interval = this.get('interval');
-    let maxTimeInMilliseconds = parseInt(this.get('maxTimeInMilliseconds'), 10);
+    let interval = this.interval;
+    let maxTimeInMilliseconds = parseInt(this.maxTimeInMilliseconds, 10);
 
     if (interval < maxTimeInMilliseconds) { return ''; }
 

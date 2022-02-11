@@ -8,7 +8,7 @@ let Cell = EmberObject.extend({
   shouldShow: false,
 
   isInteractive: computed('hasAnswer', 'shouldShow', function () {
-    return this.get('shouldShow') && !this.get('hasAnswer');
+    return this.shouldShow && !this.hasAnswer;
   })
 });
 

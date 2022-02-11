@@ -8,9 +8,9 @@ export default Component.extend({
   submitResponse: null,
   endInterview: null,
   currentQuestion: computed('interview', 'indexOfCurrentQuestion', function () {
-    return this.get('interview.questions').objectAt(this.get('indexOfCurrentQuestion'));
+    return this.get('interview.questions').objectAt(this.indexOfCurrentQuestion);
   }),
   percentComplete: computed('interview', 'indexOfCurrentQuestion', function () {
-    return this.get('indexOfCurrentQuestion') / this.get('interview.questions.length');
+    return this.indexOfCurrentQuestion / this.get('interview.questions.length');
   })
 });

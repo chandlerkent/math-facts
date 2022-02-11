@@ -25,16 +25,16 @@ export default Component.extend({
   },
 
   submitResponse(interval) {
-    console.log(this.get('timeAllowedInMS'));
-    this.get('onSubmitResponse')(EmberObject.create({
-      value: this.get('value'),
+    console.log(this.timeAllowedInMS);
+    this.onSubmitResponse(EmberObject.create({
+      value: this.value,
       time: interval
     }));
   },
 
   actions: {
     submitResponse(interval) {
-      if (isEmpty(this.get('value'))) {
+      if (isEmpty(this.value)) {
         this.set('value', this.get('question.answer'));
       }
       this.submitResponse(interval);

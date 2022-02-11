@@ -23,7 +23,7 @@ export default Component.extend({
     this.set('interval', 0);
     this.set('intervals', []);
     this.stopTimer();
-    if (!this.get('isCounting')) {
+    if (!this.isCounting) {
       this.set('isCounting', true);
     } else {
       this.startCounting();
@@ -31,7 +31,7 @@ export default Component.extend({
   },
 
   onIsCountingChanged: observer('isCounting', function () {
-    if (this.get('isCounting')) {
+    if (this.isCounting) {
       this.startCounting();
     } else {
       this.stopCounting();
@@ -39,7 +39,7 @@ export default Component.extend({
   }),
 
   startCounting() {
-    this.get('intervals').addObject(EmberObject.create({
+    this.intervals.addObject(EmberObject.create({
       startTime: new Date(),
       endTime: null
     }));
@@ -57,7 +57,7 @@ export default Component.extend({
   },
 
   computeInterval() {
-    return this.get('intervals')
+    return this.intervals
       .map(interval => {
         return (interval.get('endTime') || new Date()) - interval.get('startTime');
       })
@@ -67,7 +67,7 @@ export default Component.extend({
   },
 
   stopTimer() {
-    var timerId = this.get('timerId');
+    var timerId = this.timerId;
     if (timerId) {
       cancel(timerId);
       this.set('timerId', null);

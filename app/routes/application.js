@@ -21,11 +21,11 @@ export default Route.extend({
 
     this.cleanUpOldRecords(10);
 
-    this.get('store').push({ data });
+    this.store.push({ data });
   },
   
   cleanUpOldRecords(keepNumberOfRecords) {
-    return this.get('store').findAll('interview-result')
+    return this.store.findAll('interview-result')
       .then(results => results.sortBy('takenAt').reverse())
       .then(sortedResults => sortedResults.filter((r, index) => index >= keepNumberOfRecords))
       .then(oldestTenResults => oldestTenResults.map(r => r.destroyRecord()))

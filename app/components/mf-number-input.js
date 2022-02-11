@@ -16,7 +16,7 @@ export default Component.extend({
     },
 
     onEnter() {
-      this.get('enter')();
+      this.enter();
     },
 
     refocus() {

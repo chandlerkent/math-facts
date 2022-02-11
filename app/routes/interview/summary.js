@@ -16,7 +16,7 @@ export default Route.extend({
     this._super(controller, model);
 
     let interview = this.modelFor('interview');
-    let chart = this.get('chartGenerator').createChartForInterviewAndResults(interview, model);
+    let chart = this.chartGenerator.createChartForInterviewAndResults(interview, model);
 
     controller.set('chart', chart);
     controller.set('results', model);

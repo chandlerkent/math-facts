@@ -13,7 +13,7 @@ export default Model.extend({
   interviewId: attr('string'),
   isExtendedTime: attr('boolean'),
   maxTimePerQuestionInMS: computed('isExtendedTime', function() {
-    let isExtendedTime = this.get('isExtendedTime');
+    let isExtendedTime = this.isExtendedTime;
     if (isExtendedTime === undefined || isExtendedTime === null) {
       isExtendedTime = false;
     }

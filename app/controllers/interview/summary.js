@@ -6,7 +6,7 @@ export default Controller.extend({
 
   actions: {
     clickCell(row, column) {
-      let chart = this.get('chart');
+      let chart = this.chart;
 
       let cell = chart[row][column];
 
@@ -18,7 +18,7 @@ export default Controller.extend({
     },
 
     clickColumn(column) {
-      let chart = this.get('chart');
+      let chart = this.chart;
 
       let active;
       for (let i = 0; i < chart.length; i++) {
@@ -36,7 +36,7 @@ export default Controller.extend({
     },
 
     clickRow(row) {
-      let chart = this.get('chart');
+      let chart = this.chart;
 
       let columns = chart[0].length;
       let active;
@@ -55,7 +55,7 @@ export default Controller.extend({
     },
 
     toggleAll() {
-      let chart = this.get('chart');
+      let chart = this.chart;
 
       let rows = chart.length;
       let active;

@@ -8,6 +8,6 @@ export default Component.extend({
   percentComplete: 0.0,
 
   widthStyle: computed('percentComplete', function () {
-    return htmlSafe('width: ' + parseFloat(this.get('percentComplete')) * 100 + '%');
+    return htmlSafe('width: ' + parseFloat(this.percentComplete) * 100 + '%');
   })
 });

@@ -11,13 +11,13 @@ export default Controller.extend({
   queryParams: ['question'],
   question: 1,
   indexOfCurrentQuestion: computed('question', function () {
-    return this.get('question') - 1;
+    return this.question - 1;
   }),
   currentQuestion: computed('interview', 'indexOfCurrentQuestion', function () {
-    return this.get('interview.questions').objectAt(this.get('indexOfCurrentQuestion'));
+    return this.get('interview.questions').objectAt(this.indexOfCurrentQuestion);
   }),
   updateTitle: on('init', observer('interview', 'question', 'currentQuestion', function () {
-    document.title = `(${this.get('question')}/${this.get('interview.questions.length')}) - ${capitalize(this.get('interview.id') || '')}`;
+    document.title = `(${this.question}/${this.get('interview.questions.length')}) - ${capitalize(this.get('interview.id') || '')}`;
   })),
   interview: null,
   results: null,
@@ -26,7 +26,7 @@ export default Controller.extend({
     if (this.get('currentQuestion.isLastQuestion') || this.shouldStopInterview()) {
       this.endInterview();
     } else {
-      this.set('question', this.get('question') + 1);
+      this.set('question', this.question + 1);
     }
   },
 
@@ -34,7 +34,7 @@ export default Controller.extend({
     this.transitionToRoute(
       'interview.summary',
       this.get('interview.id'),
-      this.get('results')
+      this.results
     );
   },
 
@@ -99,14 +99,14 @@ export default Controller.extend({
 
   actions: {
     submitResponse(response) {
-      let result = this.gradeResponseForQuestion(response, this.get('currentQuestion'));
+      let result = this.gradeResponseForQuestion(response, this.currentQuestion);
 
       this.get('results.answers').replace(
-        this.get('indexOfCurrentQuestion'),
+        this.indexOfCurrentQuestion,
         1,
         result);
 
-      this.get('results').save().then(() => this.goToNextQuestion());
+      this.results.save().then(() => this.goToNextQuestion());
     },
 
     endInterview() {

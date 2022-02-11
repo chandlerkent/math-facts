@@ -8,14 +8,14 @@ export default Controller.extend({
 
   actions: {
     startInterview() {
-      let name = this.get('studentName');
+      let name = this.studentName;
       if (!name) {
         return;
       }
 
       let interviewResult = this.store.createRecord('interview-result', {
         name,
-        isExtendedTime: this.get('isExtendedTime'),
+        isExtendedTime: this.isExtendedTime,
         interviewId: this.get('model.id'),
         answers: A(new Array(this.get('model.questions.length')))
       });
