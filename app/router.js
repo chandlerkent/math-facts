@@ -1,10 +1,10 @@
 import EmberRouter from '@ember/routing/router';
-import config from './config/environment';
+import config from 'math-facts/config/environment';
 
-const Router = EmberRouter.extend({
-  location: config.locationType,
-  rootURL: config.rootURL
-});
+export default class Router extends EmberRouter {
+  location = config.locationType;
+  rootURL = config.rootURL;
+}
 
 Router.map(function() {
   this.route('interview', { path: '/interview/:interview_id' }, function () {
@@ -12,5 +12,3 @@ Router.map(function() {
     this.route('summary', { path: '/summary/:result_id' });
   });
 });
-
-export default Router;
