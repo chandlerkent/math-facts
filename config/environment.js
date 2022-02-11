@@ -22,8 +22,8 @@ module.exports = function (environment) {
       // when it is created
       MAX_TIME_PER_QUESTION: {
         DEFAULT: 4000,
-        EXTENDED: 6000
-      }
+        EXTENDED: 6000,
+      },
     },
   };
 

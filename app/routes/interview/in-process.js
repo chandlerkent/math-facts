@@ -6,9 +6,9 @@ export default class InProcessInterviewRoute extends Route {
 
   queryParams = {
     question: {
-      replace: true
-    }
-  }
+      replace: true,
+    },
+  };
 
   model(params) {
     return this.store.find('interview-result', params.result_id);
@@ -20,4 +20,4 @@ export default class InProcessInterviewRoute extends Route {
     controller.set('interview', this.modelFor('interview'));
     controller.set('results', model);
   }
-};
+}

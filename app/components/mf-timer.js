@@ -39,10 +39,12 @@ export default Component.extend({
   }),
 
   startCounting() {
-    this.intervals.addObject(EmberObject.create({
-      startTime: new Date(),
-      endTime: null
-    }));
+    this.intervals.addObject(
+      EmberObject.create({
+        startTime: new Date(),
+        endTime: null,
+      })
+    );
     this.updateInterval();
   },
 
@@ -58,8 +60,10 @@ export default Component.extend({
 
   computeInterval() {
     return this.intervals
-      .map(interval => {
-        return (interval.get('endTime') || new Date()) - interval.get('startTime');
+      .map((interval) => {
+        return (
+          (interval.get('endTime') || new Date()) - interval.get('startTime')
+        );
       })
       .reduce((sum, interval) => {
         return sum + interval;
@@ -77,6 +81,6 @@ export default Component.extend({
   actions: {
     playPause() {
       this.toggleProperty('isCounting');
-    }
-  }
+    },
+  },
 });

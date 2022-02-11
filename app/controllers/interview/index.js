@@ -17,12 +17,12 @@ export default Controller.extend({
         name,
         isExtendedTime: this.isExtendedTime,
         interviewId: this.get('model.id'),
-        answers: A(new Array(this.get('model.questions.length')))
+        answers: A(new Array(this.get('model.questions.length'))),
       });
 
       interviewResult.save().then(() => {
         this.transitionToRoute('interview.in-process', interviewResult);
       });
-    }
-  }
+    },
+  },
 });

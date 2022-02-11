@@ -8,12 +8,14 @@ export default Component.extend({
   maxTimeInMilliseconds: null,
   interval: null,
 
-  color: computed('interval', function () {
+  color: computed('interval', 'maxTimeInMilliseconds', function () {
     let interval = this.interval;
     let maxTimeInMilliseconds = parseInt(this.maxTimeInMilliseconds, 10);
 
-    if (interval < maxTimeInMilliseconds) { return ''; }
+    if (interval < maxTimeInMilliseconds) {
+      return '';
+    }
 
     return 'error';
-  })
+  }),
 });

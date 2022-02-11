@@ -21,6 +21,6 @@ export default Component.extend({
 
     refocus() {
       this.$('input').focus();
-    }
-  }
+    },
+  },
 });

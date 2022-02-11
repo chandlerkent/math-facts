@@ -17,11 +17,16 @@ export default class SummaryRoute extends Route {
     super.setupController(controller, model);
 
     let interview = this.modelFor('interview');
-    let chart = this.chartGenerator.createChartForInterviewAndResults(interview, model);
+    let chart = this.chartGenerator.createChartForInterviewAndResults(
+      interview,
+      model
+    );
 
     controller.set('chart', chart);
     controller.set('results', model);
 
-    document.title = `${model.get('name')} - ${capitalize(interview.get('id'))} - ${moment(model.get('takenAt')).format('MM-DD-YYYY')}`;
+    document.title = `${model.get('name')} - ${capitalize(
+      interview.get('id')
+    )} - ${moment(model.get('takenAt')).format('MM-DD-YYYY')}`;
   }
 }

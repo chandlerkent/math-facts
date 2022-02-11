@@ -10,17 +10,31 @@ export default Controller.extend({
   indexOfCurrentQuestion: computed('question', function () {
     return this.question - 1;
   }),
-  currentQuestion: computed('interview', 'indexOfCurrentQuestion', function () {
-    return this.get('interview.questions').objectAt(this.indexOfCurrentQuestion);
-  }),
-  updateTitle: on('init', observer('interview', 'question', 'currentQuestion', function () {
-    document.title = `(${this.question}/${this.get('interview.questions.length')}) - ${capitalize(this.get('interview.id') || '')}`;
-  })),
+  currentQuestion: computed(
+    'indexOfCurrentQuestion',
+    'interview.questions',
+    function () {
+      return this.get('interview.questions').objectAt(
+        this.indexOfCurrentQuestion
+      );
+    }
+  ),
+  updateTitle: on(
+    'init',
+    observer('interview', 'question', 'currentQuestion', function () {
+      document.title = `(${this.question}/${this.get(
+        'interview.questions.length'
+      )}) - ${capitalize(this.get('interview.id') || '')}`;
+    })
+  ),
   interview: null,
   results: null,
 
   goToNextQuestion() {
-    if (this.get('currentQuestion.isLastQuestion') || this.shouldStopInterview()) {
+    if (
+      this.get('currentQuestion.isLastQuestion') ||
+      this.shouldStopInterview()
+    ) {
       this.endInterview();
     } else {
       this.set('question', this.question + 1);
@@ -55,9 +69,9 @@ export default Controller.extend({
           return false;
         }
 
-        return (answer.get('isWrong') || answer.get('isOverTime'));
+        return answer.get('isWrong') || answer.get('isOverTime');
       })
-      .reduce(sum => sum + 1, 0);
+      .reduce((sum) => sum + 1, 0);
 
     return numberOfIncorrectQuestionsInColumn >= 3;
   },
@@ -82,9 +96,9 @@ export default Controller.extend({
     return EmberObject.create({
       answer,
       isAnswered: true,
-      isCorrect: (actualAnswer === answer),
-      isWrong: (actualAnswer !== answer),
-      isOverTime: this.isTooLong(response.get('time'))
+      isCorrect: actualAnswer === answer,
+      isWrong: actualAnswer !== answer,
+      isOverTime: this.isTooLong(response.get('time')),
     });
   },
 
@@ -96,18 +110,20 @@ export default Controller.extend({
 
   actions: {
     submitResponse(response) {
-      let result = this.gradeResponseForQuestion(response, this.currentQuestion);
+      let result = this.gradeResponseForQuestion(
+        response,
+        this.currentQuestion
+      );
 
-      this.get('results.answers').replace(
-        this.indexOfCurrentQuestion,
-        1,
-        [result]);
+      this.get('results.answers').replace(this.indexOfCurrentQuestion, 1, [
+        result,
+      ]);
 
       this.results.save().then(() => this.goToNextQuestion());
     },
 
     endInterview() {
       this.endInterview();
-    }
-  }
+    },
+  },
 });

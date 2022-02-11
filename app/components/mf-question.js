@@ -12,9 +12,11 @@ export default Component.extend({
   startTime: null,
   prompt: computed('question', 'question.prompt', function () {
     let prompt = this.get('question.prompt');
-    
-    if (!prompt) { return prompt; }
-    
+
+    if (!prompt) {
+      return prompt;
+    }
+
     return prompt.replace('/', '&divide;');
   }),
 
@@ -26,10 +28,12 @@ export default Component.extend({
 
   submitResponse(interval) {
     console.log(this.timeAllowedInMS);
-    this.onSubmitResponse(EmberObject.create({
-      value: this.value,
-      time: interval
-    }));
+    this.onSubmitResponse(
+      EmberObject.create({
+        value: this.value,
+        time: interval,
+      })
+    );
   },
 
   actions: {
@@ -38,6 +42,6 @@ export default Component.extend({
         this.set('value', this.get('question.answer'));
       }
       this.submitResponse(interval);
-    }
-  }
+    },
+  },
 });

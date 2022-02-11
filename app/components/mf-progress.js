@@ -9,5 +9,5 @@ export default Component.extend({
 
   widthStyle: computed('percentComplete', function () {
     return htmlSafe('width: ' + parseFloat(this.percentComplete) * 100 + '%');
-  })
+  }),
 });

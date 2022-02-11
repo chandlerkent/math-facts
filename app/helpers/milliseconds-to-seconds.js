@@ -2,7 +2,10 @@ import { helper as buildHelper } from '@ember/component/helper';
 
 const DEFAULT_NUMBER_OF_DECIMALS = 2;
 
-export function millisecondsToSeconds(params, { decimals = DEFAULT_NUMBER_OF_DECIMALS } = {}) {
+export function millisecondsToSeconds(
+  params,
+  { decimals = DEFAULT_NUMBER_OF_DECIMALS } = {}
+) {
   let ms = params[0];
 
   let seconds = ms / 1000;
@@ -13,7 +16,9 @@ export function millisecondsToSeconds(params, { decimals = DEFAULT_NUMBER_OF_DEC
 function roundToDecimalPlaces(input, numDecimals) {
   let multiplier = Math.pow(10, numDecimals);
 
-  return parseFloat(Math.round(input * multiplier) / multiplier).toFixed(numDecimals);
+  return parseFloat(Math.round(input * multiplier) / multiplier).toFixed(
+    numDecimals
+  );
 }
 
 export default buildHelper(millisecondsToSeconds);

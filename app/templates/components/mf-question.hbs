@@ -7,18 +7,18 @@
 
   <div class="question">
     {{{prompt}}} = <MfNumberInput @value={{value}} @enter={{action "submitResponse" interval}} />
-    <button {{action 'submitResponse' interval}}>&check;</button>
+    <button type="button" {{action 'submitResponse' interval}}>&check;</button>
   </div>
 
   <div class="buttons">
-    <button {{action endInterview}}>Stop</button>
+    <button type="button" {{action endInterview}}>Stop</button>
     {{#if isPlaying}}
-      <button {{action playPause}}>Pause</button>
+      <button type="button" {{action playPause}}>Pause</button>
     {{else}}
-      <button {{action playPause}}>Play</button>
+      <button type="button" {{action playPause}}>Play</button>
     {{/if}}
 
-    <button {{action 'submitResponse' interval}}>
+    <button type="button" {{action 'submitResponse' interval}}>
       {{#if question.isLastQuestion}}
         End Interview
       {{else}}

@@ -28,7 +28,7 @@ export default Controller.extend({
         }
 
         if (active === undefined) {
-          active = !!!cell.get('isOverridden');
+          active = !cell.get('isOverridden');
         }
 
         cell.set('isOverridden', active);
@@ -47,7 +47,7 @@ export default Controller.extend({
         }
 
         if (active === undefined) {
-          active = !!!cell.get('isOverridden');
+          active = !cell.get('isOverridden');
         }
 
         cell.set('isOverridden', active);
@@ -67,12 +67,12 @@ export default Controller.extend({
           }
 
           if (active === undefined) {
-            active = !!!cell.get('isOverridden');
+            active = !cell.get('isOverridden');
           }
 
           cell.set('isOverridden', active);
         }
       }
-    }
-  }
+    },
+  },
 });

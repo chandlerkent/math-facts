@@ -5,12 +5,12 @@ import Transform from '@ember-data/serializer/transform';
 export default Transform.extend({
   deserialize(serialized) {
     if (isArray(serialized)) {
-      return serialized.map(o => EmberObject.create(o));
+      return serialized.map((o) => EmberObject.create(o));
     }
     return EmberObject.create(serialized);
   },
 
   serialize(deserialized) {
     return deserialized;
-  }
+  },
 });

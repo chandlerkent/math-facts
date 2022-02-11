@@ -7,4 +7,4 @@ export default class InterviewRoute extends Route {
   model(params) {
     return this.store.peekRecord('interview', params.interview_id);
   }
-};
+}

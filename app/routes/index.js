@@ -5,6 +5,6 @@ export default Route.extend({
     didTransition() {
       document.title = 'Math Facts';
       return true;
-    }
-  }
+    },
+  },
 });

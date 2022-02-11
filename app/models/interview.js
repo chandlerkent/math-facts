@@ -10,10 +10,10 @@ export const INTERVIEWS = [
   subtractionB,
   multiplicationB,
   divisionB,
-  additionC
+  additionC,
 ];
 
 export default Model.extend({
   questions: attr(),
-  operator: attr('string')
+  operator: attr('string'),
 });

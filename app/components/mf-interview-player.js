@@ -7,10 +7,22 @@ export default Component.extend({
   indexOfCurrentQuestion: 0,
   submitResponse: null,
   endInterview: null,
-  currentQuestion: computed('interview', 'indexOfCurrentQuestion', function () {
-    return this.get('interview.questions').objectAt(this.indexOfCurrentQuestion);
-  }),
-  percentComplete: computed('interview', 'indexOfCurrentQuestion', function () {
-    return this.indexOfCurrentQuestion / this.get('interview.questions.length');
-  })
+  currentQuestion: computed(
+    'indexOfCurrentQuestion',
+    'interview.questions',
+    function () {
+      return this.get('interview.questions').objectAt(
+        this.indexOfCurrentQuestion
+      );
+    }
+  ),
+  percentComplete: computed(
+    'indexOfCurrentQuestion',
+    'interview.questions.length',
+    function () {
+      return (
+        this.indexOfCurrentQuestion / this.get('interview.questions.length')
+      );
+    }
+  ),
 });

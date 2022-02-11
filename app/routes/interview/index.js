@@ -8,5 +8,5 @@ export default Route.extend({
     controller.set('studentName', null);
 
     document.title = capitalize(model.get('id') + ' Interview');
-  }
+  },
 });
