@@ -1,5 +1,4 @@
-import Model from 'ember-data/model';
-import attr from 'ember-data/attr';
+import Model, { attr } from '@ember-data/model';
 import additionB from './interviews/addition-b';
 import additionC from './interviews/addition-c';
 import subtractionB from './interviews/subtraction-b';

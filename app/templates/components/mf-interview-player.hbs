@@ -1,7 +1,3 @@
-{{mf-progress percentComplete=percentComplete}}
+<MfProgress @percentComplete={{percentComplete}} />
 
-{{mf-question
-  question=currentQuestion
-  timeAllowedInMS=results.maxTimePerQuestionInMS
-  onSubmitResponse=(action submitResponse)
-  endInterview=(action endInterview)}}
+<MfQuestion @question={{currentQuestion}} @timeAllowedInMS={{results.maxTimePerQuestionInMS}} @onSubmitResponse={{action submitResponse}} @endInterview={{action endInterview}} />

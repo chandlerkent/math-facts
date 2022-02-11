@@ -1,6 +1,5 @@
 import { computed } from '@ember/object';
-import Model from 'ember-data/model';
-import attr from 'ember-data/attr';
+import Model, { attr } from '@ember-data/model';
 import ENV from 'math-facts/config/environment';
 
 const MAX_TIME_PER_QUESTION = ENV.APP.MAX_TIME_PER_QUESTION;

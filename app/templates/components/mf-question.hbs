@@ -1,12 +1,12 @@
-{{#mf-timer startTime=startTime as |interval isPlaying playPause|}}
+<MfTimer @startTime={{startTime}} as |interval isPlaying playPause|>
   <div class="timer">
-    {{#mf-colorize-interval interval=interval maxTimeInMilliseconds=timeAllowedInMS}}
+    <MfColorizeInterval @interval={{interval}} @maxTimeInMilliseconds={{timeAllowedInMS}}>
       {{milliseconds-to-seconds interval}}
-    {{/mf-colorize-interval}}
+    </MfColorizeInterval>
   </div>
 
   <div class="question">
-    {{{prompt}}} = {{mf-number-input value=value enter=(action 'submitResponse' interval)}}
+    {{{prompt}}} = <MfNumberInput @value={{value}} @enter={{action "submitResponse" interval}} />
     <button {{action 'submitResponse' interval}}>&check;</button>
   </div>
 
@@ -26,4 +26,4 @@
       {{/if}}
     </button>
   </div>
-{{/mf-timer}}
+</MfTimer>

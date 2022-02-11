@@ -1,6 +1,6 @@
 import EmberObject from '@ember/object';
 import { isArray } from '@ember/array';
-import Transform from 'ember-data/transform';
+import Transform from '@ember-data/serializer/transform';
 
 export default Transform.extend({
   deserialize(serialized) {
