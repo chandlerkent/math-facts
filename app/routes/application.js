@@ -1,14 +1,16 @@
-import Ember from 'ember';
+import { all } from 'rsvp';
+import EmberObject from '@ember/object';
+import Route from '@ember/routing/route';
 import { INTERVIEWS } from '../models/interview';
 
-export default Ember.Route.extend({
+export default Route.extend({
   beforeModel() {
     let data = INTERVIEWS.map(interview => {
       interview.attributes.questions = interview.attributes.questions
-        .map(question => Ember.Object.create(question))
+        .map(question => EmberObject.create(question))
         .map((question, index) => {
           question.set('isLastQuestion', index === interview.attributes.questions.length - 1);
-          question.set('response', Ember.Object.create({ response: null, time: 0, isAnswered: false }));
+          question.set('response', EmberObject.create({ response: null, time: 0, isAnswered: false }));
           question.set('id', index + 1);
 
           return question;
@@ -28,9 +30,9 @@ export default Ember.Route.extend({
       .then(sortedResults => sortedResults.filter((r, index) => index >= keepNumberOfRecords))
       .then(oldestTenResults => oldestTenResults.map(r => r.destroyRecord()))
       .then(deletionPromises => {
-        Ember.Logger.debug('Removed records: ', deletionPromises.length);
+        console.debug('Removed records: ', deletionPromises.length);
         return deletionPromises;
       })
-      .then(promises => Ember.RSVP.all(promises));
+      .then(promises => all(promises));
   }
 });

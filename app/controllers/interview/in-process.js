@@ -1,19 +1,23 @@
-import Ember from 'ember';
+import { isNone } from '@ember/utils';
+import { capitalize } from '@ember/string';
+import { on } from '@ember/object/evented';
+import EmberObject, { computed, observer } from '@ember/object';
+import Controller from '@ember/controller';
 import ENV from 'math-facts/config/environment';
 
 const MAX_TIME_PER_QUESTION = ENV.APP.MAX_TIME_PER_QUESTION;
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   queryParams: ['question'],
   question: 1,
-  indexOfCurrentQuestion: Ember.computed('question', function () {
+  indexOfCurrentQuestion: computed('question', function () {
     return this.get('question') - 1;
   }),
-  currentQuestion: Ember.computed('interview', 'indexOfCurrentQuestion', function () {
+  currentQuestion: computed('interview', 'indexOfCurrentQuestion', function () {
     return this.get('interview.questions').objectAt(this.get('indexOfCurrentQuestion'));
   }),
-  updateTitle: Ember.on('init', Ember.observer('interview', 'question', 'currentQuestion', function () {
-    document.title = `(${this.get('question')}/${this.get('interview.questions.length')}) - ${Ember.String.capitalize(this.get('interview.id') || '')}`;
+  updateTitle: on('init', observer('interview', 'question', 'currentQuestion', function () {
+    document.title = `(${this.get('question')}/${this.get('interview.questions.length')}) - ${capitalize(this.get('interview.id') || '')}`;
   })),
   interview: null,
   results: null,
@@ -50,7 +54,7 @@ export default Ember.Controller.extend({
         }
 
         let answer = this.get('results.answers').objectAt(index);
-        if (Ember.isNone(answer)) {
+        if (isNone(answer)) {
           return false;
         }
 
@@ -66,7 +70,7 @@ export default Ember.Controller.extend({
 
     for (let i = answers.length - 1; i >= 0; i--) {
       let answer = answers[i];
-      if (!Ember.isNone(answer) && answer.get('isAnswered')) {
+      if (!isNone(answer) && answer.get('isAnswered')) {
         return i;
       }
     }
@@ -78,7 +82,7 @@ export default Ember.Controller.extend({
     let actualAnswer = question.get('answer');
     let answer = parseInt(response.get('value'), 10);
 
-    return Ember.Object.create({
+    return EmberObject.create({
       answer,
       isAnswered: true,
       isCorrect: (actualAnswer === answer),

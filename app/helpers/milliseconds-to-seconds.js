@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { helper as buildHelper } from '@ember/component/helper';
 
 const DEFAULT_NUMBER_OF_DECIMALS = 2;
 
@@ -16,4 +16,4 @@ function roundToDecimalPlaces(input, numDecimals) {
   return parseFloat(Math.round(input * multiplier) / multiplier).toFixed(numDecimals);
 }
 
-export default Ember.Helper.helper(millisecondsToSeconds);
+export default buildHelper(millisecondsToSeconds);

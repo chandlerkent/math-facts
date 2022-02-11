@@ -1,6 +1,7 @@
-import Ember from 'ember';
+import { A } from '@ember/array';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   model: null,
   studentName: null,
   isExtendedTime: false,
@@ -16,7 +17,7 @@ export default Ember.Controller.extend({
         name,
         isExtendedTime: this.get('isExtendedTime'),
         interviewId: this.get('model.id'),
-        answers: Ember.A(new Array(this.get('model.questions.length')))
+        answers: A(new Array(this.get('model.questions.length')))
       });
 
       interviewResult.save().then(() => {

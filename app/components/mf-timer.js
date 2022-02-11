@@ -1,6 +1,8 @@
-import Ember from 'ember';
+import { later, cancel } from '@ember/runloop';
+import EmberObject, { observer } from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   intervals: [],
   timerId: null,
   interval: null,
@@ -28,7 +30,7 @@ export default Ember.Component.extend({
     }
   },
 
-  onIsCountingChanged: Ember.observer('isCounting', function () {
+  onIsCountingChanged: observer('isCounting', function () {
     if (this.get('isCounting')) {
       this.startCounting();
     } else {
@@ -37,7 +39,7 @@ export default Ember.Component.extend({
   }),
 
   startCounting() {
-    this.get('intervals').addObject(Ember.Object.create({
+    this.get('intervals').addObject(EmberObject.create({
       startTime: new Date(),
       endTime: null
     }));
@@ -51,7 +53,7 @@ export default Ember.Component.extend({
 
   updateInterval() {
     this.set('interval', this.computeInterval());
-    this.set('timerId', Ember.run.later(this, this.updateInterval, 77));
+    this.set('timerId', later(this, this.updateInterval, 77));
   },
 
   computeInterval() {
@@ -67,7 +69,7 @@ export default Ember.Component.extend({
   stopTimer() {
     var timerId = this.get('timerId');
     if (timerId) {
-      Ember.run.cancel(timerId);
+      cancel(timerId);
       this.set('timerId', null);
     }
   },

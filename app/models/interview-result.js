@@ -1,3 +1,4 @@
+import { computed } from '@ember/object';
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import ENV from 'math-facts/config/environment';
@@ -11,7 +12,7 @@ export default Model.extend({
   name: attr('string'),
   interviewId: attr('string'),
   isExtendedTime: attr('boolean'),
-  maxTimePerQuestionInMS: Ember.computed('isExtendedTime', function() {
+  maxTimePerQuestionInMS: computed('isExtendedTime', function() {
     let isExtendedTime = this.get('isExtendedTime');
     if (isExtendedTime === undefined || isExtendedTime === null) {
       isExtendedTime = false;

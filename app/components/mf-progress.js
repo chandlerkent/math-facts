@@ -1,11 +1,13 @@
-import Ember from 'ember';
+import { htmlSafe } from '@ember/template';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   tagName: 'div',
   classNames: ['mf-progress'],
   percentComplete: 0.0,
 
-  widthStyle: Ember.computed('percentComplete', function () {
-    return Ember.String.htmlSafe('width: ' + parseFloat(this.get('percentComplete')) * 100 + '%');
+  widthStyle: computed('percentComplete', function () {
+    return htmlSafe('width: ' + parseFloat(this.get('percentComplete')) * 100 + '%');
   })
 });

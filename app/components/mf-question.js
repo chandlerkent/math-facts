@@ -1,6 +1,8 @@
-import Ember from 'ember';
+import { isEmpty } from '@ember/utils';
+import EmberObject, { computed } from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   tagName: 'div',
   classNames: ['mf-question'],
   question: null,
@@ -8,7 +10,7 @@ export default Ember.Component.extend({
   value: null,
   endInterview: null,
   startTime: null,
-  prompt: Ember.computed('question', 'question.prompt', function () {
+  prompt: computed('question', 'question.prompt', function () {
     let prompt = this.get('question.prompt');
     
     if (!prompt) { return prompt; }
@@ -24,7 +26,7 @@ export default Ember.Component.extend({
 
   submitResponse(interval) {
     console.log(this.get('timeAllowedInMS'));
-    this.get('onSubmitResponse')(Ember.Object.create({
+    this.get('onSubmitResponse')(EmberObject.create({
       value: this.get('value'),
       time: interval
     }));
@@ -32,7 +34,7 @@ export default Ember.Component.extend({
 
   actions: {
     submitResponse(interval) {
-      if (Ember.isEmpty(this.get('value'))) {
+      if (isEmpty(this.get('value'))) {
         this.set('value', this.get('question.answer'));
       }
       this.submitResponse(interval);

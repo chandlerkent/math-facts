@@ -1,16 +1,18 @@
-import Ember from 'ember';
+import { htmlSafe } from '@ember/template';
+import Service from '@ember/service';
+import EmberObject, { computed } from '@ember/object';
 
-let Cell = Ember.Object.extend({
+let Cell = EmberObject.extend({
   prompt: '',
   hasAnswer: false,
   shouldShow: false,
 
-  isInteractive: Ember.computed('hasAnswer', 'shouldShow', function () {
+  isInteractive: computed('hasAnswer', 'shouldShow', function () {
     return this.get('shouldShow') && !this.get('hasAnswer');
   })
 });
 
-export default Ember.Service.extend({
+export default Service.extend({
   createChartForInterviewAndResults(interview, results) {
     let operation = interview.get('operator');
 
@@ -27,7 +29,7 @@ export default Ember.Service.extend({
         if (operation === '/') {
           let apart = prompt.split(' ');
           apart[1] = '&divide;';
-          printablePrompt = Ember.String.htmlSafe(apart.join(' '));
+          printablePrompt = htmlSafe(apart.join(' '));
         }
         let questionIndex = this.indexOfQuestionByPrompt(interview, prompt);
         if (questionIndex < 0) {

@@ -1,8 +1,10 @@
-import Ember from 'ember';
+import { capitalize } from '@ember/string';
+import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
 import moment from 'moment';
 
-export default Ember.Route.extend({
-  chartGenerator: Ember.inject.service(),
+export default Route.extend({
+  chartGenerator: service(),
 
   model(params) {
     let results = this.store.find('interview-result', params.result_id);
@@ -19,6 +21,6 @@ export default Ember.Route.extend({
     controller.set('chart', chart);
     controller.set('results', model);
 
-    document.title = `${model.get('name')} - ${Ember.String.capitalize(interview.get('id'))} - ${moment(model.get('takenAt')).format('MM-DD-YYYY')}`;
+    document.title = `${model.get('name')} - ${capitalize(interview.get('id'))} - ${moment(model.get('takenAt')).format('MM-DD-YYYY')}`;
   }
 });

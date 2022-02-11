@@ -1,12 +1,13 @@
+import EmberObject from '@ember/object';
+import { isArray } from '@ember/array';
 import Transform from 'ember-data/transform';
-import Ember from 'ember';
 
 export default Transform.extend({
   deserialize(serialized) {
-    if (Ember.isArray(serialized)) {
-      return serialized.map(o => Ember.Object.create(o));
+    if (isArray(serialized)) {
+      return serialized.map(o => EmberObject.create(o));
     }
-    return Ember.Object.create(serialized);
+    return EmberObject.create(serialized);
   },
 
   serialize(deserialized) {
