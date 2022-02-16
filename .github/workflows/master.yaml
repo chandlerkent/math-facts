@@ -1,0 +1,34 @@
+name: Deploy Staging
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "7.x"
+
+      - name: Install dependencies
+        run: npm install
+        env:
+          CI: true
+
+      - name: Build project
+        run: npm run build
+        env:
+          CI: true
+
+      - name: Build project
+        run: npm run deploy
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
