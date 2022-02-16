@@ -23,6 +23,12 @@ jobs:
         env:
           CI: true
 
+      - name: Install bower
+        run: npm install --global bower
+
+      - name: Install bower dependencies
+        run: bower install
+
       - name: Build project
         run: npm run build
         env:
