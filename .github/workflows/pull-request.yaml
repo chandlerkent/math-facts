@@ -19,7 +19,7 @@ jobs:
           node-version: "10.x"
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
         env:
           CI: true
 
