@@ -1,47 +1,73 @@
 <div class="summary">
   {{#link-to 'index' classNames='no-print'}}&larr; Start a New Test{{/link-to}}
 
-  <div class="content">
-    <div class="centered">
-      <h1>{{results.name}}</h1>
-      <h5>{{moment-format results.takenAt 'MM/DD/YYYY'}}</h5>
+  <div class="print-container">
+    <div class="content">
+      <div class="centered">
+        <h1>{{results.name}}</h1>
+        <h5>{{moment-format results.takenAt 'MM/DD/YYYY'}}</h5>
+      </div>
     </div>
-  </div>
-  <table class="summary">
-    <tr class="column-header">
-      <td class="empty" {{action 'toggleAll'}}></td>
-      {{#each chart.[0] as |column colIndex|}}
-        <td class="clickable" {{action 'clickColumn' colIndex}}>{{colIndex}}</td>
-      {{/each}}
-    </tr>
-    {{#each chart as |row rowIndex|}}
-      <tr>
-        <td class="row-header clickable" {{action 'clickRow' rowIndex}}>{{rowIndex}}</td>
-        {{#each row as |data colIndex|}}
-          <td class="{{if data.isInteractive 'clickable'}} {{if data.isCorrect (unless data.isOverTime 'correct')}} {{if data.isWrongOrOverTime 'wrong'}} {{if data.isOverridden 'override'}}" onclick={{if data.isInteractive (action 'clickCell' rowIndex colIndex)}}>
-            {{#if data.shouldShow}}
-              {{data.prompt}} {{if data.isWrong '='}} {{if data.isWrong data.response}}
-              {{#if data.isOverTime}}
-                <br>
-                <span class="think-time">(think time{{#if results.isExtendedTime}}*{{/if}})</span>
-              {{/if}}
-            {{/if}}
-          </td>
+    <table class="summary">
+      <tr class="column-header">
+        <td class="empty" {{action 'toggleAll'}}></td>
+        {{#each chart.[0] as |column colIndex|}}
+          <td class="clickable" {{action 'clickColumn' colIndex}}>{{colIndex}}</td>
         {{/each}}
       </tr>
-    {{/each}}
-  </table>
-  {{#if results.isExtendedTime}}
-    <div class="centered">
-      <i>* Extended Time</i>
-    </div>
-  {{/if}}
+      {{#each chart as |row rowIndex|}}
+        <tr>
+          <td class="row-header clickable" {{action 'clickRow' rowIndex}}>{{rowIndex}}</td>
+          {{#each row as |data colIndex|}}
+            <td class="{{if data.isInteractive 'clickable'}} {{if data.isCorrect (unless data.isOverTime 'correct')}} {{if data.isWrongOrOverTime 'wrong'}} {{if data.isOverridden 'override'}}" onclick={{if data.isInteractive (action 'clickCell' rowIndex colIndex)}}>
+              {{#if data.shouldShow}}
+                {{data.prompt}} {{if data.isWrong '='}} {{if data.isWrong data.response}}
+                {{#if data.isOverTime}}
+                  <br>
+                  <span class="think-time">(think time{{#if results.isExtendedTime}}*{{/if}})</span>
+                {{/if}}
+              {{/if}}
+            </td>
+          {{/each}}
+        </tr>
+      {{/each}}
+    </table>
+    {{#if results.isExtendedTime}}
+      <div class="centered">
+        <i>* Extended Time</i>
+      </div>
+    {{/if}}
+
+    {{#if printMasteredFacts}}
+      <div class="mastered-facts">
+        {{#each chart as |row rowIndex|}}
+          {{#each row as |data colIndex|}}
+            {{#if data.shouldShow}}
+              {{#if data.isCorrect}}
+                <div class="mastered-fact">
+                  {{data.prompt}}
+                </div>
+              {{else if data.isOverridden}}
+                <div class="mastered-fact">
+                  {{data.prompt}}
+                </div>
+              {{/if}}
+            {{/if}}
+          {{/each}}
+        {{/each}}
+      </div>
+    {{/if}}
+  </div>
 </div>
 
 <div class="centered" class="no-print">
   <br>
   <br>
-  <a href="javascript:window.print();">Print</a>
+  <div>
+    <label for="printMasteredFacts" title="Print mastered facts?">Include Mastered Facts</label>
+    {{input id="printMasteredFacts" type='checkbox' checked=printMasteredFacts}}
+  </div>
+  <a href="#" onclick={{action 'print'}}>Print Results</a>
   <p>To print the test results grid with the colors, you must select the option to include backgrounds in the browser's print dialog.</p>
   <p>For example, in Chrome make sure to check the "Background graphics" option under "More settings":</p>
   <p><img src="/chrome-print.png" /></p>

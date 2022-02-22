@@ -158,6 +158,31 @@ table.summary {
   }
 }
 
+.mastered-facts {
+  page-break-before: always;
+  break-before: always;
+
+  .mastered-fact {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 3in;
+    height: 3in;
+    text-align: center;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 72px;
+    margin: 10px;
+  }
+}
+
+.print-container {
+  max-width: 8.5in;
+  margin: 0 auto;
+}
+
 @media print {
   .no-print {
     display: none;
